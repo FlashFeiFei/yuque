@@ -1,12 +1,14 @@
-package main
+package test
 
 import (
 	"encoding/json"
 	"fmt"
+	"github.com/FlashFeiFei/yuque/request"
 	"github.com/FlashFeiFei/yuque/response"
 	"io/ioutil"
 	"log"
 	"net/http"
+	"testing"
 )
 
 func HelloServer(w http.ResponseWriter, req *http.Request) {
@@ -33,10 +35,21 @@ func UserInfo(w http.ResponseWriter, req *http.Request) {
 	body, _ := ioutil.ReadAll(resp.Body)
 	log.Println(string(body))
 }
-func main() {
+
+func UserInfo2(w http.ResponseWriter, req *http.Request){
+	log.Println("my---------user")
+	client := request.NewUserRequestById("oJz8ZC7jfPD95cDxeTIRyBei6SuuUUrvfcOoDfue","262184")
+	res_user := new(response.ResponseUserSerializer)
+	request.Request(client,res_user)
+	data,_ :=json.Marshal(res_user)
+	log.Println(string(data))
+}
+
+func TestRun(t *testing.T) {
 
 	http.HandleFunc("/", HelloServer)
 	http.HandleFunc("/user", UserInfo)
+	http.HandleFunc("/myuser", UserInfo2)
 
 	http.ListenAndServe(":12345", nil)
 }

@@ -1,5 +1,14 @@
 package response
 
+
+/**
+文档响应
+*/
+type ResponseUserSerializer struct {
+	Data *UserSerializer `json:"data"`
+}
+
+
 /**
 用户结构
 */
