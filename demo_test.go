@@ -36,12 +36,17 @@ func UserInfo(w http.ResponseWriter, req *http.Request) {
 	log.Println(string(body))
 }
 
-func UserInfo2(w http.ResponseWriter, req *http.Request){
+func UserInfo2(w http.ResponseWriter, req *http.Request) {
 	log.Println("my---------user")
-	client := request.NewUserRequestById("oJz8ZC7jfPD95cDxeTIRyBei6SuuUUrvfcOoDfue","262184")
+	user_request := request.UserRequest{
+		AuthToken: request.AuthToken{
+			Token: "oJz8ZC7jfPD95cDxeTIRyBei6SuuUUrvfcOoDfue",
+		},
+	}
+	client := user_request.NewUserRequestById("262184")
 	res_user := new(response.ResponseUserSerializer)
-	request.Request(client,res_user)
-	data,_ :=json.Marshal(res_user)
+	client.Request(res_user)
+	data, _ := json.Marshal(res_user)
 	log.Println(string(data))
 }
 
