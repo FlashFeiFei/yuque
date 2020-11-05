@@ -44,7 +44,7 @@ func UserInfo2(w http.ResponseWriter, req *http.Request) {
 			Token: "oJz8ZC7jfPD95cDxeTIRyBei6SuuUUrvfcOoDfue",
 		},
 	}
-	client := user_request.NewUserRequestById("262184")
+	client := user_request.NewUserRequestById(262184)
 	res_user := new(response.ResponseUserSerializer)
 	client.Request(res_user)
 	data, _ := json.Marshal(res_user)
