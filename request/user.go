@@ -14,6 +14,6 @@ func (r *UserRequest) NewUserRequestByLogin(login string) *ClientHandle {
 }
 
 //通过id获取用户信息
-func (r *UserRequest) NewUserRequestById(id string) *ClientHandle {
-	return NewClientHandle(r.AuthToken.Token, fmt.Sprintf("/users/%s", id), http.MethodGet, nil)
+func (r *UserRequest) NewUserRequestById(id int64) *ClientHandle {
+	return NewClientHandle(r.AuthToken.Token, fmt.Sprintf("/users/%d", id), http.MethodGet, nil)
 }
